@@ -1,0 +1,39 @@
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="glass-card p-5 fade-in" style="width: 400px;">
+        <div class="brand text-center mb-4">
+            <h2 class="text-white"><i class="fas fa-shopping-cart me-2"></i>E-DASH</h2>
+            <p class="text-muted small">Administration Panel</p>
+        </div>
+
+        <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+            <div class="mb-4">
+                <label class="form-label text-white small">Nom d'utilisateur</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0 text-muted"><i
+                            class="fas fa-user"></i></span>
+                    <input type="text" name="username" ngModel class="form-control border-start-0" placeholder="admin"
+                        required>
+                </div>
+            </div>
+
+            <div class="mb-5">
+                <label class="form-label text-white small">Mot de passe</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0 text-muted"><i
+                            class="fas fa-lock"></i></span>
+                    <input type="password" name="password" ngModel class="form-control border-start-0"
+                        placeholder="••••••••" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-premium w-100" [disabled]="isLoading">
+                <span *ngIf="!isLoading">Se connecter</span>
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+            </button>
+        </form>
+
+        <div class="mt-4 text-center">
+            <p class="text-muted x-small">MEAN Stack Project © 2025</p>
+        </div>
+    </div>
+</div>

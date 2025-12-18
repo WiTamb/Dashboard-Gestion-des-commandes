@@ -1,0 +1,70 @@
+<div class="fade-in">
+    <div class="d-flex align-items-center mb-5">
+        <button class="btn btn-link text-white me-3" routerLink="/articles">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1>{{ editMode ? 'Modifier l\'Article' : 'Nouvel Article' }}</h1>
+    </div>
+
+    <div class="glass-card p-4">
+        <form (submit)="onSaveArticle(articleForm)" #articleForm="ngForm" class="row g-4">
+            <div class="col-md-8">
+                <div class="row g-4">
+                    <div class="col-12">
+                        <label class="form-label small text-muted">Nom de l'article</label>
+                        <input type="text" name="name" [(ngModel)]="article.name" class="form-control" required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small text-muted">Description</label>
+                        <textarea name="description" [(ngModel)]="article.description" class="form-control" rows="4"
+                            required></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small text-muted">Catégorie</label>
+                        <select name="category" [(ngModel)]="article.category" class="form-control" required>
+                            <option value="">Sélectionner une catégorie</option>
+                            <option value="Électronique">Électronique</option>
+                            <option value="Mode">Mode</option>
+                            <option value="Maison">Maison</option>
+                            <option value="Sport">Sport</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label small text-muted">Prix (TND)</label>
+                        <input type="number" name="price" [(ngModel)]="article.price" class="form-control" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label small text-muted">Quantité en stock</label>
+                        <input type="number" name="quantity" [(ngModel)]="article.quantity" class="form-control"
+                            required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="image-upload-wrapper glass-card p-3 text-center d-flex flex-column align-items-center justify-content-center"
+                    style="min-height: 250px;">
+                    <img [src]="imagePreview" *ngIf="imagePreview" class="img-fluid rounded mb-3"
+                        style="max-height: 200px;">
+                    <div *ngIf="!imagePreview" class="text-muted mb-3">
+                        <i class="fas fa-image fa-3x"></i>
+                        <p class="mt-2 small">Aucun aperçu</p>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-primary" (click)="fileInput.click()">
+                        <i class="fas fa-upload me-2"></i> Choisir une image
+                    </button>
+                    <input type="file" #fileInput (change)="onFilePicked($event)" class="d-none" accept="image/*">
+                </div>
+            </div>
+
+            <div class="col-12 text-end mt-5">
+                <button type="button" class="btn btn-link text-white me-3 text-decoration-none"
+                    routerLink="/articles">Annuler</button>
+                <button type="submit" class="btn-premium px-5" [disabled]="articleForm.invalid || isLoading">
+                    <span *ngIf="!isLoading">{{ editMode ? 'Mettre à jour' : 'Enregistrer article' }}</span>
+                    <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

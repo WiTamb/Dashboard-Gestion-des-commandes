@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Angular
+.angular/
+dist/
+out-tsc/
+/frontend/dist/
+/frontend/out-tsc/
+
+# IDE and System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log
+yarn-error.log
+
+# Backend specific
+/backend/uploads/

@@ -1,0 +1,58 @@
+<div class="fade-in">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1>Gestion des Articles</h1>
+        <button class="btn btn-premium" routerLink="/articles/new">
+            <i class="fas fa-plus me-2"></i> Ajouter un Article
+        </button>
+    </div>
+
+    <div class="glass-card p-4">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Nom</th>
+                        <th>Catégorie</th>
+                        <th>Prix</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let article of articles">
+                        <td>
+                            <img [src]="'http://localhost:5000/uploads/' + article.image" class="rounded"
+                                style="width: 50px; height: 50px; object-fit: cover;"
+                                onerror="this.src='assets/placeholder.jpg'">
+                        </td>
+                        <td>
+                            <div class="fw-bold">{{ article.name }}</div>
+                            <div class="text-muted small text-truncate" style="max-width: 200px;">{{ article.description
+                                }}</div>
+                        </td>
+                        <td><span class="badge bg-secondary">{{ article.category }}</span></td>
+                        <td>{{ article.price | currency:'TND':'symbol':'1.0-0' }}</td>
+                        <td>
+                            <span [class]="article.quantity <= 5 ? 'text-danger fw-bold' : 'text-success'">
+                                {{ article.quantity }}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info me-2"
+                                [routerLink]="['/articles/edit', article._id]">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" (click)="onDelete(article._id)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="articles.length === 0 && !isLoading">
+                        <td colspan="6" class="text-center py-5 text-muted">Aucun article trouvé.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

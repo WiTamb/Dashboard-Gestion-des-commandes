@@ -1,0 +1,60 @@
+<div class="fade-in">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1>Suivi des Livraisons</h1>
+        <span class="badge bg-purple px-3 py-2" style="background: var(--secondary-color);">Livraisons Totales: {{
+            deliveries.length }}</span>
+    </div>
+
+    <div class="glass-card p-4">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>ID Livraison</th>
+                        <th>Commande</th>
+                        <th>Adresse de Livraison</th>
+                        <th>Date Prévue</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let delivery of deliveries">
+                        <td class="small fw-mono">#{{ delivery._id.substring(0, 8) | uppercase }}</td>
+                        <td class="small">#{{ delivery.orderId?._id?.substring(0, 8) | uppercase }}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-map-marker-alt text-danger me-2"></i>
+                                <span>{{ delivery.address }}</span>
+                            </div>
+                        </td>
+                        <td>{{ delivery.date | date:'mediumDate' }}</td>
+                        <td>
+                            <select class="form-select form-select-sm text-white border-0"
+                                [ngClass]="getStatusClass(delivery.status)"
+                                (change)="onStatusChange(delivery._id, $event)">
+                                <option *ngFor="let opt of statusOptions" [value]="opt"
+                                    [selected]="opt === delivery.status">{{ opt }}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr *ngIf="deliveries.length === 0 && !isLoading">
+                        <td colspan="5" class="text-center py-5 text-muted">Aucune livraison en cours.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .fw-mono {
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .form-select {
+        border-radius: 20px;
+        padding-left: 12px;
+        padding-right: 30px;
+        cursor: pointer;
+    }
+</style>
