@@ -4,7 +4,7 @@ Ce projet est un tableau de bord e-commerce complet adapté au marché tunisien,
 
 ## 📋 Fonctionnalités Clés
 - **Marché Tunisien** : Devise TND, produits locaux, et adresses tunisiennes.
-- **Authentification** : Système sécurisé avec JWT (Login: `admin` / `password123`).
+- **Authentification** : Système sécurisé avec JWT.
 - **Dashboard** : Statistiques visuelles avec Chart.js (Ventes, répartition commandes).
 - **Gestion Complète** : Articles, Commandes, Livraisons, et Stock.
 - **Design** : Interface moderne "Glassmorphism" avec Bootstrap et Dark Mode.
