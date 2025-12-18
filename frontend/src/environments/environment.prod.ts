@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://mean-backend-placeholder.onrender.com/api'
+    apiUrl: 'https://dashboard-gestion-des-commandes.onrender.com/api'
 };

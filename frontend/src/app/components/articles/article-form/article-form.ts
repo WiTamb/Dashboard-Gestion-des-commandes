@@ -73,12 +73,26 @@ export class ArticleFormComponent implements OnInit {
 
     this.isLoading = true;
     if (this.editMode) {
-      this.articleService.updateArticle(this.articleId!, formData).subscribe(() => {
-        this.router.navigate(['/articles']);
+      this.articleService.updateArticle(this.articleId!, formData).subscribe({
+        next: () => {
+          this.router.navigate(['/articles']);
+        },
+        error: (error) => {
+          console.error('Error updating article:', error);
+          alert('Failed to update article');
+          this.isLoading = false;
+        }
       });
     } else {
-      this.articleService.createArticle(formData).subscribe(() => {
-        this.router.navigate(['/articles']);
+      this.articleService.createArticle(formData).subscribe({
+        next: () => {
+          this.router.navigate(['/articles']);
+        },
+        error: (error) => {
+          console.error('Error creating article:', error);
+          alert('Failed to create article');
+          this.isLoading = false;
+        }
       });
     }
   }
