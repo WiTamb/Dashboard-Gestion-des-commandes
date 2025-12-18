@@ -74,10 +74,7 @@ Assurez-vous d'avoir installé :
    ```
    *L'application sera accessible sur http://localhost:4200*
 
-## 🔑 Connexion
-Utilisez les identifiants par défaut pour accéder au dashboard :
-- **Utilisateur :** `admin`
-- **Mot de passe :** `password123`
+
 
 ## 🛠 Structure du Projet
 
@@ -95,49 +92,3 @@ mean/
     ├── src/app/services/    # Services HTTP
     └── src/styles.css       # Styles globaux (Glassmorphism)
 ```
-
-## ⚠️ Dépannage
-- **Erreur de connexion (Login reste en chargement) ?**
-  - Vérifiez que le backend tourne sur le port 5000.
-  - Vérifiez que vous avez bien lancé `npm run seed` pour créer l'utilisateur admin.
-- **Les données ne s'affichent pas ?**
-  - Vérifiez que MongoDB est bien lancé (`mongod` ou service Windows).
-- **Problèmes de compilation Frontend ?**
-  - Assurez-vous d'utiliser une version récente de Node.js.
-
-## 📦 Exporter et Partager le Projet
-
-### 1. Partager le Code Source
-Pour partager le projet avec vos collègues :
-- **Option A (Git - Recommandé) :** Poussez le code sur GitHub/GitLab. Vos collègues feront un `git clone`.
-- **Option B (Zip) :** Compressez le dossier `mean` **en excluant** les dossiers `node_modules`.
-  - Vos collègues devront lancer `npm install` dans `backend` et `frontend`.
-
-### 2. Partager la Base de Données (3 Méthodes)
-
-#### Méthode A : Le Script de Seed (Recommandé pour le dév)
-C'est la méthode la plus simple. Le fichier `seed.js` contient déjà toutes les données de base pour le marché tunisien.
-- **Vos collègues** lancent simplement : `npm run seed` (dans le dossier backend).
-- **Résultat :** Tout le monde a exactement les mêmes produits, catégories et utilisateurs de test.
-
-#### Méthode B : Export/Import MongoDB (Pour données personnalisées)
-Si vous avez créé des données manuellement et voulez les partager :
-1. **Exporter :**
-   ```bash
-   mongodump --db ecommerce_db --out dump/
-   ```
-   *Envoyez le dossier `dump/` généré à vos collègues.*
-
-2. **Importer (Chez vos collègues) :**
-   ```bash
-   mongorestore dump/
-   ```
-
-#### Méthode C : MongoDB Atlas (Cloud)
-Pour que tout le monde travaille sur la **mëme** base de données en temps réel :
-1. Créez un compte sur [MongoDB Atlas](https://www.mongodb.com/atlas).
-2. Obtenez votre "Connection String" (ex: `mongodb+srv://user:pass@cluster...`).
-3. Tout le monde met cette URL dans son fichier `.env` :
-   ```env
-   MONGODB_URI=mongodb+srv://...
-   ```
