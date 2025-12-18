@@ -22,4 +22,16 @@ export class DeliveryService {
   updateDeliveryStatus(id: string, status: string) {
     return this.http.put(`${this.apiUrl}/${id}/status`, { status });
   }
+
+  getDelivery(id: string) {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  updateDelivery(id: string, deliveryData: any) {
+    return this.http.put(`${this.apiUrl}/${id}`, deliveryData);
+  }
+
+  deleteDelivery(id: string) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

@@ -1,0 +1,55 @@
+<div class="fade-in">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1>{{ editMode ? 'Modifier la Livraison' : 'Nouvelle Livraison' }}</h1>
+    </div>
+
+    <div class="glass-card p-4">
+        <form #deliveryForm="ngForm" (ngSubmit)="onSaveDelivery(deliveryForm)">
+            <!-- Order Selection -->
+            <div class="mb-4">
+                <label for="orderId" class="form-label text-white">Commande Associée</label>
+                <select class="form-select bg-dark text-white border-secondary" id="orderId" name="orderId"
+                    [(ngModel)]="delivery.orderId" required>
+                    <option value="">-- Sélectionner une commande --</option>
+                    <option *ngFor="let order of orders" [value]="order._id">
+                        #{{ order._id.substring(0, 8) | uppercase }} - {{ order.customerName }} ({{ order.total |
+                        currency:'TND':'symbol':'1.0-0' }})
+                    </option>
+                </select>
+            </div>
+
+            <!-- Address -->
+            <div class="mb-4">
+                <label for="address" class="form-label text-white">Adresse de Livraison</label>
+                <textarea class="form-control bg-dark text-white border-secondary" id="address" name="address"
+                    [(ngModel)]="delivery.address" required rows="3"
+                    placeholder="Entrez l'adresse complète de livraison"></textarea>
+            </div>
+
+            <!-- Date -->
+            <div class="mb-4">
+                <label for="date" class="form-label text-white">Date de Livraison Prévue</label>
+                <input type="date" class="form-control bg-dark text-white border-secondary" id="date" name="date"
+                    [(ngModel)]="delivery.date" required>
+            </div>
+
+            <!-- Status -->
+            <div class="mb-4">
+                <label for="status" class="form-label text-white">Statut</label>
+                <select class="form-select bg-dark text-white border-secondary" id="status" name="status"
+                    [(ngModel)]="delivery.status">
+                    <option *ngFor="let opt of statusOptions" [value]="opt">{{ opt }}</option>
+                </select>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn btn-premium" [disabled]="isLoading">
+                    <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+                    {{ editMode ? 'Mettre à Jour' : 'Créer la Livraison' }}
+                </button>
+                <button type="button" class="btn btn-outline-secondary" routerLink="/deliveries">Annuler</button>
+            </div>
+        </form>
+    </div>
+</div>

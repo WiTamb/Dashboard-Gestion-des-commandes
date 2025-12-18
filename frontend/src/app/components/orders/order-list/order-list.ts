@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { OrderService } from '../../../services/order';
 
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './order-list.html',
   styleUrls: ['./order-list.css']
 })
@@ -32,6 +33,14 @@ export class OrderListComponent implements OnInit {
     this.orderService.updateOrderStatus(id, newStatus).subscribe(() => {
       this.loadOrders();
     });
+  }
+
+  onDelete(id: string) {
+    if (confirm('Voulez-vous vraiment supprimer cette commande ?')) {
+      this.orderService.deleteOrder(id).subscribe(() => {
+        this.loadOrders();
+      });
+    }
   }
 
   getStatusClass(status: string) {

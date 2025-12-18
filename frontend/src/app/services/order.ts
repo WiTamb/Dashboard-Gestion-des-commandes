@@ -22,4 +22,16 @@ export class OrderService {
   updateOrderStatus(id: string, status: string) {
     return this.http.put(`${this.apiUrl}/${id}/status`, { status });
   }
+
+  createOrder(orderData: any) {
+    return this.http.post(this.apiUrl, orderData);
+  }
+
+  updateOrder(id: string, orderData: any) {
+    return this.http.put(`${this.apiUrl}/${id}`, orderData);
+  }
+
+  deleteOrder(id: string) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

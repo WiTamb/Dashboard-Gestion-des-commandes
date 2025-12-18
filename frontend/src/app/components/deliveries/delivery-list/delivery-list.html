@@ -1,8 +1,13 @@
 <div class="fade-in">
     <div class="d-flex justify-content-between align-items-center mb-5">
         <h1>Suivi des Livraisons</h1>
-        <span class="badge bg-purple px-3 py-2" style="background: var(--secondary-color);">Livraisons Totales: {{
-            deliveries.length }}</span>
+        <div class="d-flex gap-3 align-items-center">
+            <span class="badge bg-purple px-3 py-2" style="background: var(--secondary-color);">Livraisons Totales: {{
+                deliveries.length }}</span>
+            <button class="btn btn-premium" routerLink="/deliveries/new">
+                <i class="fas fa-plus me-2"></i> Nouvelle Livraison
+            </button>
+        </div>
     </div>
 
     <div class="glass-card p-4">
@@ -15,6 +20,7 @@
                         <th>Adresse de Livraison</th>
                         <th>Date Prévue</th>
                         <th>Statut</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,9 +42,18 @@
                                     [selected]="opt === delivery.status">{{ opt }}</option>
                             </select>
                         </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info me-2"
+                                [routerLink]="['/deliveries/edit', delivery._id]">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" (click)="onDelete(delivery._id)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                     <tr *ngIf="deliveries.length === 0 && !isLoading">
-                        <td colspan="5" class="text-center py-5 text-muted">Aucune livraison en cours.</td>
+                        <td colspan="6" class="text-center py-5 text-muted">Aucune livraison en cours.</td>
                     </tr>
                 </tbody>
             </table>

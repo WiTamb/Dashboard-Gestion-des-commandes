@@ -1,7 +1,12 @@
 <div class="fade-in">
     <div class="d-flex justify-content-between align-items-center mb-5">
         <h1>Commandes Clients</h1>
-        <span class="badge bg-primary px-3 py-2">Total: {{ orders.length }}</span>
+        <div class="d-flex gap-3 align-items-center">
+            <span class="badge bg-primary px-3 py-2">Total: {{ orders.length }}</span>
+            <button class="btn btn-premium" routerLink="/orders/new">
+                <i class="fas fa-plus me-2"></i> Nouvelle Commande
+            </button>
+        </div>
     </div>
 
     <div class="glass-card p-4 text-white">
@@ -15,6 +20,7 @@
                         <th>Articles</th>
                         <th>Montant Total</th>
                         <th>Statut</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,9 +41,17 @@
                                     [selected]="opt === order.status">{{ opt }}</option>
                             </select>
                         </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info me-2" [routerLink]="['/orders/edit', order._id]">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" (click)="onDelete(order._id)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                     <tr *ngIf="orders.length === 0 && !isLoading">
-                        <td colspan="6" class="text-center py-5 text-muted">Aucune commande reçue.</td>
+                        <td colspan="7" class="text-center py-5 text-muted">Aucune commande reçue.</td>
                     </tr>
                 </tbody>
             </table>

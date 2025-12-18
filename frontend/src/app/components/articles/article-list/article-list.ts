@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ArticleService } from '../../../services/article';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-article-list',
@@ -25,6 +26,10 @@ export class ArticleListComponent implements OnInit {
       this.articles = data;
       this.isLoading = false;
     });
+  }
+
+  getImageUrl(image: string): string {
+    return `${environment.imageUrl}/${image}`;
   }
 
   onDelete(id: string) {

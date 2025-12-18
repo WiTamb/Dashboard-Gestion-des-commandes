@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { DeliveryService } from '../../../services/delivery';
 
 @Component({
   selector: 'app-delivery-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './delivery-list.html',
   styleUrls: ['./delivery-list.css']
 })
@@ -32,6 +33,14 @@ export class DeliveryListComponent implements OnInit {
     this.deliveryService.updateDeliveryStatus(id, newStatus).subscribe(() => {
       this.loadDeliveries();
     });
+  }
+
+  onDelete(id: string) {
+    if (confirm('Voulez-vous vraiment supprimer cette livraison ?')) {
+      this.deliveryService.deleteDelivery(id).subscribe(() => {
+        this.loadDeliveries();
+      });
+    }
   }
 
   getStatusClass(status: string) {

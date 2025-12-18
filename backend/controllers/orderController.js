@@ -57,3 +57,28 @@ exports.updateOrderStatus = async (req, res) => {
         res.status(500).json({ message: 'Error updating order', error: error.message });
     }
 };
+
+exports.updateOrder = async (req, res) => {
+    try {
+        const { customerName, items, total, status } = req.body;
+        const order = await Order.findByIdAndUpdate(
+            req.params.id,
+            { customerName, items, total, status },
+            { new: true }
+        );
+        if (!order) return res.status(404).json({ message: 'Order not found' });
+        res.status(200).json(order);
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating order', error: error.message });
+    }
+};
+
+exports.deleteOrder = async (req, res) => {
+    try {
+        const order = await Order.findByIdAndDelete(req.params.id);
+        if (!order) return res.status(404).json({ message: 'Order not found' });
+        res.status(200).json({ message: 'Order deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting order', error: error.message });
+    }
+};
